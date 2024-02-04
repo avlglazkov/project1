@@ -19,3 +19,4 @@
 15. **git remote add origin git@github.com:11111/project1.git** - добавить локальную репо в гитхаб  
 16. **git branch -M main** - не помню уже  
 17. **git push -U origin main** - запушить в мастер-ветку  
+18. **git log--oneline** - сокращенный просмотр логов
