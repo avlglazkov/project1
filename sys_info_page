@@ -4,6 +4,14 @@ TITLE="SysInfo Report for $HOSTNAME"
 CURRENT_TIME=$(date +"%x %r %Z")
 TIME_STAMP="Generated $CURRENT_TIME, by $USER"
 
+report_free_ram () {
+cat <<- _EOF_
+	<h2>Free RAM</h2>
+	<pre>$(free -h)</pre>
+	_EOF_
+return
+}
+
 report_uptime () {
 cat <<- _EOF_
 	<h2>System Uptime</h2>
@@ -34,6 +42,7 @@ cat << _EOF_
 <body>
 <h1> $TITLE </h1>
 <p> $TIME_STAMP </p>
+$(report_free_ram)
 $(report_uptime)
 $(report_disk_space)
 $(report_home_space)
