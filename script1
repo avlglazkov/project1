@@ -2,11 +2,14 @@
 #!/bin/bash
 #программа вывода страницы с информацией о системе
 TITLE="SysInfo Report for $HOSTNAME"
+CURRENT_TIME=$(date +"%x %r %Z")
+TIME_STAMP="Generated $CURRENT_TIME, by $USER"
 echo " <html>
 <head>
 <title> $TITLE </title>
 </head>
 <body>
-<h1> $title </h1>
+<h1> $TITLE </h1>
+<p> $TIME_STAMP </p>
 </body>
 </html>"
