@@ -1,0 +1,74 @@
+
+---
+- name: install and start Docker, mc, python, java and zip
+  hosts: test_servers
+  become: yes
+  
+  tasks:
+ # - name: Update yum repo metainfo
+  #  yum:
+   #   update__cash: yes
+    #  force_apt_get: yes
+
+  - name: install Docker
+    yum:
+      name: docker
+      state: present
+
+  - name: Install MC
+    yum:
+      name: mc
+      state: present
+      
+  - name: install python
+    yum:
+      name: python
+      state: present
+      
+  - name: install java
+    yum:
+      name: java
+      state: present
+      
+  - name: install zip
+    yum:
+      name: zip
+      state: present    
+
+  - name: install PostgreSQL
+    yum:
+      name: postgresql-server
+      state: present
+
+  - name: Start and enable autostart Docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Start and enable autostart PostgreSQL
+    service:
+      name: postgresql
+      state: postgresql
+      enabled: yes 
+
+ # - name: Start MC
+  #  service:
+   #   name: mc
+    #  state: started
+ # - name: Start python
+  #  service: 
+   #   name: python
+    #  state: started
+
+ # - name: Start java
+  #  service:
+   #   name: java
+    #  state: started
+      
+  #- name: Start zip
+   # service:
+    #  name: zip
+     # state: started
+      
+      

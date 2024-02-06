@@ -1,0 +1,16 @@
+---
+- name: Download new program
+  hosts: test_servers
+  become_method: sudo
+  become_user: root
+
+  tasks:
+   - name: Download
+     yum:
+       name: "{{ package }}"
+     vars:
+       package:
+       - mc
+       - wget
+       - tar
+       state: latest
