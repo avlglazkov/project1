@@ -1,10 +1,17 @@
 ---
-- name: Ping Hosts
+- name: Collect Info
   hosts: test_servers
   become: false
   tasks:
    - name: test connection
      ping:
+
+   - name: Populate servic facts
+     ansible.builtin.service_facts:
+
+   - name: Print all available services
+     debug:
+       var: ansible_facts.services
 
 
 - name: install and start Docker, mc, python, java and zip
@@ -51,31 +58,4 @@
     service:
       name: docker
       state: started
-      enabled: yes
-
-  - name: Start and enable autostart PostgreSQL
-    service:
-      name: postgresql
-      state: postgresql
-      enabled: yes 
-
- # - name: Start MC
-  #  service:
-   #   name: mc
-    #  state: started
- # - name: Start python
-  #  service: 
-   #   name: python
-    #  state: started
-
- # - name: Start java
-  #  service:
-   #   name: java
-    #  state: started
-      
-  #- name: Start zip
-   # service:
-    #  name: zip
-     # state: started
-      
-      
+      enabled: yes      
