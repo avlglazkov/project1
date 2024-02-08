@@ -1,5 +1,12 @@
-
 ---
+- name: Ping Hosts
+  hosts: test_servers
+  become: false
+  tasks:
+   - name: test connection
+     ping:
+
+
 - name: install and start Docker, mc, python, java and zip
   hosts: test_servers
   become: yes
