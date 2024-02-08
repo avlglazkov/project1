@@ -2,6 +2,7 @@
 - name: Collect Info
   hosts: test_servers
   become: false
+
   tasks:
    - name: test connection
      ping:
@@ -13,17 +14,25 @@
      debug:
        var: ansible_facts.services
 
-
-- name: install and start Docker, mc, python, java and zip
+- name: Add repo
   hosts: test_servers
   become: yes
-  
-  tasks:
- # - name: Update yum repo metainfo
-  #  yum:
-   #   update__cash: yes
-    #  force_apt_get: yes
 
+  tasks:
+  - name: Add yum repo
+    ansible.builtin.yum_repository:
+      name: epel
+      description: EPEL YUM repo
+      file: external_repos
+      baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+      gpgcheck: no
+
+
+- name: install services
+  hosts: test_servers
+  become: yes
+
+  tasks:
   - name: install Docker
     yum:
       name: docker
