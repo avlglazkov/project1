@@ -1,12 +1,32 @@
-<!DOCKTYPE html>
-<html lang="ru"
+<html>
 <head>
-<meta charset="UTF-8">
-<title> Учебный проект </title>
+<title> SysInfo Report for centos.lab </title>
 </head>
 <body>
-<h1> Основные цели проекта </h1>
-Данный сайт необходим для базового освоения основных DevOps инструментов.
-Проект будет постепенно улучшаться.
+<h1> SysInfo Report for centos.lab </h1>
+<p> Generated 06.02.2024 11:24:39  MSK, by root </p>
+<h2>Free RAM</h2>
+<pre>              total        used        free      shared  buff/cache   available
+Mem:           3,7G        1,7G        212M         14M        1,8G        1,7G
+Swap:          1,1G          0B        1,1G</pre>
+<h2>System Uptime</h2>
+<pre> 11:24:39 up 2 days,  3:46,  2 users,  load average: 0,00, 0,01, 0,05</pre>
+<h2>Disk Space Utilization</h2>
+<pre>Файловая система               Размер Использовано  Дост Использовано% Cмонтировано в
+devtmpfs                         1,9G            0  1,9G            0% /dev
+tmpfs                            1,9G            0  1,9G            0% /dev/shm
+tmpfs                            1,9G         8,8M  1,9G            1% /run
+tmpfs                            1,9G            0  1,9G            0% /sys/fs/cgroup
+/dev/mapper/centos_centos-root   9,1G         3,9G  5,2G           43% /
+/dev/sda1                       1014M         225M  790M           23% /boot
+tmpfs                            379M            0  379M            0% /run/user/0
+tmpfs                            379M            0  379M            0% /run/user/1002
+overlay                          9,1G         3,9G  5,2G           43% /var/lib/docker/overlay2/416d02687ad56326e5bad6823d0ead5a27d349735a4527a8d83a5bade6cc24e5/merged
+shm                               64M            0   64M            0% /var/lib/docker/containers/8656198ec5518a600e3728bb9034860567597ad4d3aa4c20b873a9ea1c016487/shm</pre>
+<h2>Home Space Utilization</h2>
+<pre>20K	/home/a.glazkov
+16K	/home/alex
+12K	/home/ansible_man
+4,0K	/home/scripts</pre>
 </body>
 </html>
