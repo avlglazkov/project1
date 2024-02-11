@@ -1,3 +1,6 @@
+
+
+
 ---
 - name: Collect Info
   hosts: test_servers
@@ -35,36 +38,60 @@
   tasks:
   - name: install Docker
     yum:
-      name: docker
+      name:
+        - docker
+        - mc
+        - python
+        - zip
       state: present
-
-  - name: Install MC
-    yum:
-      name: mc
-      state: present
-      
-  - name: install python
-    yum:
-      name: python
-      state: present
-      
-  - name: install java
-    yum:
-      name: java
-      state: present
-      
-  - name: install zip
-    yum:
-      name: zip
-      state: present    
-
-  - name: install PostgreSQL
-    yum:
-      name: postgresql-server
-      state: present
-
+ 
   - name: Start and enable autostart Docker
     service:
       name: docker
       state: started
       enabled: yes      
+
+- name: Create directory (server2)
+  hosts: server2
+  become: yes
+
+  tasks:
+  - name: Create directory /ARCHIVE 
+    ansible.builtin.file:
+      path: /ARCHIVE
+      state: directory
+      mode: '0755'
+
+- name: Create directory (server3)
+  hosts: server3
+  become: yes
+
+  tasks:
+  - name: Create directory /ARCHIVE
+    ansible.builtin.file:
+      path: /ARCHIVE
+      state: directory
+      mode: '0755'
+
+- name: Touch file /ARCHIVE/test_file
+  hosts: server2
+  become: yes
+
+  tasks:
+  - name: Create test_files
+    ansible.builtin.file:
+      path: /ARCHIVE/test_file
+      state: touch
+     # mode: u=rw,g=wx;o=rwx
+
+- name: Touch file /ARCHIVE/test_file
+  hosts: server3
+  become: yes
+ 
+  tasks:
+  - name: Create test_file
+    ansible.builtin.file:
+      path: /ARCHIVE/test_file
+      state: touch
+ 
+
