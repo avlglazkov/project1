@@ -2,7 +2,7 @@
 
 #Проверки файла
 
-FILE=index.html
+FILE=/etc/hostname
 
 if [ -e "$FILE" ]; then
 if [ -f "$FILE" ]; then

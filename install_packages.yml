@@ -1,6 +1,4 @@
 
-
-
 ---
 - name: Collect Info
   hosts: test_servers
@@ -82,7 +80,6 @@
     ansible.builtin.file:
       path: /ARCHIVE/test_file
       state: touch
-     # mode: u=rw,g=wx;o=rwx
 
 - name: Touch file /ARCHIVE/test_file
   hosts: server3
@@ -93,5 +90,67 @@
     ansible.builtin.file:
       path: /ARCHIVE/test_file
       state: touch
- 
 
+- name: Set  hostname for server2
+  hosts: server2
+  become: yes
+
+  tasks:
+  - name: Set a hostname
+    ansible.builtin.hostname:
+      name: ansible.slave1
+
+- name: Set hostname for server3
+  hosts: server3
+  become: yes
+
+  tasks:
+  - name: Set a hostname
+    ansible.builtin.hostname:
+      name: ansible.slave2
+
+
+- name: Set hostame for server4
+  hosts: server4
+  become: yes
+  
+  tasks:
+  ansible.builtin.hostname:
+    name: ansible.slave3
+
+
+- name: Create directory (server4)
+  hosts: server4
+  become: yes
+
+  tasks:
+  - name: Create directory /ARCHIVE
+    ansible.builtin.file:
+      path: /ARCHIVE
+      state: directory
+      mode: '0755'
+
+
+- name: Touch file /ARCHIVE/test_file
+  hosts: server4
+  become: yes
+
+  tasks:
+  - name: Create test_files
+    ansible.builtin.file:
+      path: /ARCHIVE/test_file
+      state: touch
+
+
+
+
+
+ 
+- name: shutdown servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Reboot after 60  seconds
+    command: /sbin/shutdown -r 1
+      
