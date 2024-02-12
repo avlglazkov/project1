@@ -1,4 +1,3 @@
-
 ---
 - name: Collect Info
   hosts: test_servers
@@ -29,12 +28,12 @@
       gpgcheck: no
 
 
-- name: install services
+- name: install soft
   hosts: test_servers
   become: yes
 
   tasks:
-  - name: install Docker
+  - name: install soft
     yum:
       name:
         - docker
@@ -50,44 +49,15 @@
       state: started
       enabled: yes      
 
-- name: Create directory (server2)
-  hosts: server2
-  become: yes
 
-  tasks:
   - name: Create directory /ARCHIVE 
     ansible.builtin.file:
       path: /ARCHIVE
       state: directory
       mode: '0755'
 
-- name: Create directory (server3)
-  hosts: server3
-  become: yes
 
-  tasks:
-  - name: Create directory /ARCHIVE
-    ansible.builtin.file:
-      path: /ARCHIVE
-      state: directory
-      mode: '0755'
-
-- name: Touch file /ARCHIVE/test_file
-  hosts: server2
-  become: yes
-
-  tasks:
   - name: Create test_files
-    ansible.builtin.file:
-      path: /ARCHIVE/test_file
-      state: touch
-
-- name: Touch file /ARCHIVE/test_file
-  hosts: server3
-  become: yes
- 
-  tasks:
-  - name: Create test_file
     ansible.builtin.file:
       path: /ARCHIVE/test_file
       state: touch
@@ -99,7 +69,7 @@
   tasks:
   - name: Set a hostname
     ansible.builtin.hostname:
-      name: ansible.slave1
+      name: ansible.slave
 
 - name: Set hostname for server3
   hosts: server3
@@ -108,7 +78,7 @@
   tasks:
   - name: Set a hostname
     ansible.builtin.hostname:
-      name: ansible.slave2
+      name: ansible.slave1
 
 
 - name: Set hostame for server4
@@ -118,34 +88,7 @@
   tasks:
   - name: Set a hostname
     ansible.builtin.hostname:
-      name: ansible.slave3
-
-
-- name: Create directory (server4)
-  hosts: server4
-  become: yes
-
-  tasks:
-  - name: Create directory /ARCHIVE
-    ansible.builtin.file:
-      path: /ARCHIVE
-      state: directory
-      mode: '0755'
-
-
-- name: Touch file /ARCHIVE/test_file
-  hosts: server4
-  become: yes
-
-  tasks:
-  - name: Create test_files
-    ansible.builtin.file:
-      path: /ARCHIVE/test_file
-      state: touch
-
-
-
-
+      name: ansible.slave2
 
  
 - name: shutdown servers
